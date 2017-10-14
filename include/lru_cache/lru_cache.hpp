@@ -59,7 +59,7 @@ namespace lru_cache
     protected:
         using List_t = std::list<std::pair<Key_t, Value_t>>;
         using Map_t = std::unordered_map<Key_t, typename List_t::iterator>;
-        using Lock = std::lock_guard<Lock_t>;
+        using Lock = std::scoped_lock<Lock_t>;
 
         List_t  m_list;
         Map_t   m_map;
@@ -152,7 +152,7 @@ namespace lru_cache
             // if not return the empty optional
             if (it == m_map.end())
             {
-                return {};
+                return std::nullopt;
             }
 
             // element is present...
