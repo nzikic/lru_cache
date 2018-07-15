@@ -2,17 +2,32 @@ cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 
 project (lru_cache VERSION 1.0)
 
-# c++17 has to be enabled
-set(CXX_STANDARD 17)
-set(CXX_STANDARD_REQUIRED ON)
 
-# header-only library
+
+#
+# lru_cache - header-only library
+#
+
 add_library (lru_cache INTERFACE)
 target_include_directories (lru_cache INTERFACE include/)
 
-# sources (only to be IDE friendly)
-target_sources (lru_cache INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/lru_cache/lru_cache.hpp)
+
+# c++17 has to be enabled
+set(CXX_STANDARD_REQUIRED ON)
+target_compile_features(lru_cache INTERFACE cxx_std_17)
+
+
+#
+# build unit tests (default off)
+#
+option(LRU_CACHE_BUILD_UNIT_TESTS "Build unit tests" OFF)
+
+if (LRU_CACHE_BUILD_UNIT_TESTS)
+    find_package(GTest REQUIRED)
+
+    add_subdirectory(test)
+
+endif(LRU_CACHE_BUILD_UNIT_TESTS)
 
 #installation
 install (DIRECTORY include DESTINATION ${CMAKE_INSTALL_PREFIX})

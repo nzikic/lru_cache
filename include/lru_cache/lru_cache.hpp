@@ -122,8 +122,7 @@ namespace lru_cache
                 Lock lock(m_lock);
 
                 // lookup value in cache
-                auto it = m_map.find(key);
-                if (it == m_map.end())
+                if (auto it = m_map.find(key); it == m_map.end())
                 {
                     // insert item into cache (and check if cache is full)
                     if (m_list.size() >= m_capacity)
