@@ -13,9 +13,11 @@ target_link_libraries(lru_cache_test
 target_sources(lru_cache_test
     PRIVATE
         main.cpp
+        test_parameters.h
         test_cache_size.cpp
         test_cache_evict.cpp
-        test_parameters.h
+        test_cache_content.cpp
+        test_cache_get.cpp
 )
 
 add_test(Testing lru_cache_test)

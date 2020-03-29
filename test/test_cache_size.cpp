@@ -1,5 +1,6 @@
 #include "lru_cache/lru_cache.hpp"
 #include "test_parameters.h"
+
 #include <gtest/gtest.h>
 #include <gtest/gtest-param-test.h>
 #include <gmock/gmock-matchers.h>
@@ -54,20 +55,7 @@ namespace lru_test::size_test
                                 Cache_parameters_size{Input_content{ }, 0},
                                 Cache_parameters_size{Input_content{ {3,3}, {2,2}, {1,1} }, 3},
                                 Cache_parameters_size{Input_content{ {3,3}, {2,2}, {1,1}, {0,0} }, 4},
-                                Cache_parameters_size{Input_content{ {5,5}, {4,4}, {3,3}, {2,2}, {1,1}, {0,0} }, 4})
+                                Cache_parameters_size{Input_content{ {5,5}, {4,4}, {3,3}, {2,2}, {1,1}, {0,0} }, 4},
+                                Cache_parameters_size{Input_content{ {0,0}, {4,4}, {0,0}, {0,0}, {4,4}, {0,0}, {0,0} }, 2})
                             );
-
-    TEST_F(Cache_size_tests, inserting_6_elements_into_size_4_cache_containst_last_4_inserted_elements)
-    {
-        cache.insert(5, 5);
-        cache.insert(4, 4);
-        cache.insert(3, 3);
-        cache.insert(2, 2);
-        cache.insert(1, 1);
-        cache.insert(0, 0);
-
-        const std::vector<std::pair<int, int>> expected{ {0,0}, {1,1}, {2,2}, {3,3} };
-        const auto content = cache.release();
-        ASSERT_THAT(content, ::testing::ContainerEq(expected));
-    }
 }

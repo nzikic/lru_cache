@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <initializer_list>
+#include <vector>
 
 namespace lru_test
 {
@@ -45,6 +46,35 @@ namespace lru_test
         }
 
         friend void PrintTo(const Cache_parameters& param, std::ostream* os)
+        {
+            *os << "{ "; param.print(*os); *os << " }";
+        }
+    };
+
+    struct Cache_parameters_content : public Cache_parameters
+    {
+        Cache_parameters_content(Input_content&& input_values,
+                                 Expected_content&& expected_content)
+            : Cache_parameters{std::move(input_values)}
+            , content{std::move(expected_content.content)}
+        {}
+
+        std::vector<std::pair<int, int>> content;
+
+        void print(std::ostream &os) const override
+        {
+            std::string separator{" "};
+            Cache_parameters::print(os);
+            os << ", content: [";
+            for (auto& [k,v] : content)
+            {
+                os << separator << "{" << k << "," << v << "}";
+                separator = ", ";
+            }
+            os << "]";
+        }
+
+        friend void PrintTo(const Cache_parameters_content& param, std::ostream* os)
         {
             *os << "{ "; param.print(*os); *os << " }";
         }
