@@ -15,6 +15,7 @@ target_sources(lru_cache_test
         main.cpp
         test_cache_size.cpp
         test_cache_evict.cpp
+        test_parameters.h
 )
 
 install (TARGETS lru_cache_test DESTINATION ${CMAKE_INSTALL_PREFIX}/lru_tests/)
