@@ -18,4 +18,6 @@ target_sources(lru_cache_test
         test_parameters.h
 )
 
+add_test(Testing lru_cache_test)
+
 install (TARGETS lru_cache_test DESTINATION ${CMAKE_INSTALL_PREFIX}/lru_tests/)
