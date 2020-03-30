@@ -115,7 +115,7 @@ namespace lru_cache
             template <
                     typename Key_tt = Key_t,
                     typename Value_tt = Value_t,
-                    class Key_tt_MustBe_Key_t = std::enable_if_t<std::is_same_v<std::remove_reference_t<Key_tt>, Key_t>>,
+                    class Key_tt_MustBe_Key_t = std::enable_if_t<std::is_same_v<std::decay_t<Key_tt>, Key_t>>,
                     class Value_tt_MustBe_Value_t = std::enable_if_t<std::is_same_v<std::remove_reference_t<Value_tt>, Value_t>>>
             void insert(Key_tt&& key, Value_tt&& value)
             {
@@ -141,7 +141,7 @@ namespace lru_cache
              * If the given key isn't in cache, the function returns empty std::optional object.
              */
             template <typename Key_tt = Key_t,
-                      class TypeMustBe_Key_t = std::enable_if_t<std::is_same_v<std::remove_reference_t<Key_tt>, Key_t>>>
+                      class TypeMustBe_Key_t = std::enable_if_t<std::is_same_v<std::decay_t<Key_tt>, Key_t>>>
             std::optional<Value_t> get(Key_tt&& key)
             {
                 Lock lock(m_lock);

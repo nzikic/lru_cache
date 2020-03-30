@@ -1,0 +1,23 @@
+cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
+
+#
+add_executable(example_meme_likes_tests)
+
+target_include_directories (example_meme_likes_tests PRIVATE ./ ${GMOCK_INCLUDE_DIRS})
+
+target_link_libraries(example_meme_likes_tests
+    lru_cache
+    lib_example_meme_likes
+    GTest::Main
+    ${GMOCK_BOTH_LIBRARIES}
+)
+
+target_sources(example_meme_likes_tests
+    PRIVATE
+        provider_tests.cpp
+        database_tests.cpp
+)
+
+add_test(Meme_likes example_meme_likes_tests)
+
+install (TARGETS example_meme_likes_tests DESTINATION ${CMAKE_INSTALL_PREFIX}/examples/meme_likes/test/)
