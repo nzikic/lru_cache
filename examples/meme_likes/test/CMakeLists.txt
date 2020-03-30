@@ -1,7 +1,7 @@
-cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
-
-#
-add_executable(example_meme_likes_tests)
+add_executable(example_meme_likes_tests
+        provider_tests.cpp
+        database_tests.cpp
+)
 
 target_include_directories (example_meme_likes_tests PRIVATE ./ ${GMOCK_INCLUDE_DIRS})
 
@@ -17,6 +17,7 @@ target_sources(example_meme_likes_tests
         provider_tests.cpp
         database_tests.cpp
 )
+
 
 add_test(Meme_likes example_meme_likes_tests)
 

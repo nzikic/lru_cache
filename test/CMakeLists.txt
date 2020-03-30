@@ -1,7 +1,4 @@
-cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
-
-#
-add_executable(lru_cache_test)
+add_executable(lru_cache_test main.cpp)
 
 target_include_directories (lru_cache_test PRIVATE ./)
 
