@@ -1,15 +1,15 @@
-add_executable(lru_cache_test main.cpp)
+add_executable(lru_cache_test)
 
-target_include_directories (lru_cache_test PRIVATE ./)
+target_include_directories (lru_cache_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(lru_cache_test
-    lru_cache
-    GTest::GTest
+    PRIVATE
+        lru_cache
+        GMock::main
 )
 
 target_sources(lru_cache_test
     PRIVATE
-        main.cpp
         test_parameters.h
         test_cache_size.cpp
         test_cache_evict.cpp

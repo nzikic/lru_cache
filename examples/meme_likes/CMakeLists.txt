@@ -1,14 +1,14 @@
 # library
-add_library(lib_example_meme_likes STATIC cache.cpp)
+add_library(lib_example_meme_likes STATIC)
 
-target_include_directories(lib_example_meme_likes PUBLIC ./)
+target_include_directories(lib_example_meme_likes PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(lib_example_meme_likes PUBLIC lru_cache)
 target_sources(lib_example_meme_likes PRIVATE meme.h cache.h cache.cpp)
 
 # executable
 add_executable(example_meme_likes main.cpp)
 
-target_link_libraries(example_meme_likes lib_example_meme_likes)
+target_link_libraries(example_meme_likes PRIVATE lib_example_meme_likes)
 
 install(TARGETS example_meme_likes DESTINATION ${CMAKE_INSTALL_PREFIX}/examples/meme_likes/)
 

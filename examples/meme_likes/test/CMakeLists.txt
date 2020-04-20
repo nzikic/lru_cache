@@ -1,15 +1,12 @@
-add_executable(example_meme_likes_tests
-        provider_tests.cpp
-        database_tests.cpp
-)
+add_executable(example_meme_likes_tests)
 
-target_include_directories (example_meme_likes_tests PRIVATE ./ ${GMOCK_INCLUDE_DIRS})
+target_include_directories (example_meme_likes_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(example_meme_likes_tests
-    lru_cache
-    lib_example_meme_likes
-    GTest::Main
-    ${GMOCK_BOTH_LIBRARIES}
+    PRIVATE
+        lru_cache
+        lib_example_meme_likes
+        GMock::main
 )
 
 target_sources(example_meme_likes_tests
