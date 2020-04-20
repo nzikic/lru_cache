@@ -12,8 +12,8 @@ using namespace ::testing;
     {
         public:
             MockMemeDataBase() = default;
-            MOCK_METHOD1(get_by_name, Meme(const std::string&));
-            MOCK_METHOD1(update_meme, void(const Meme&));
+            MOCK_METHOD(Meme, get_by_name, (const std::string&), (override));
+            MOCK_METHOD(void, update_meme, (const Meme&), (override));
     };
 
     class MemeDatabaseTests : public ::testing::Test
